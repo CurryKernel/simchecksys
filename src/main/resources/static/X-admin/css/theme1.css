@@ -1,0 +1,21 @@
+body{
+    background:#BFD0DB;
+}
+.container{
+    background:#E7A167;
+}
+.left-nav{
+    background:#1A1B20;
+}
+
+.left-nav a{
+    color:rgba(231,193,161,.7);
+}
+.left-nav a.active{
+    background: #78B3F9 !important;
+    color: #fff;
+}
+.left-nav a:hover{
+    background: #FFCE00 !important;
+    color: #fff;
+}

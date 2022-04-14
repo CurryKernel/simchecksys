@@ -1,0 +1,153 @@
+<!doctype html>
+<html class="x-admin-sm" lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>作业查重系统管理员端</title>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link rel="stylesheet" href="/X-admin/css/font.css">
+        <link rel="stylesheet" href="/X-admin/css/xadmin.css">
+        <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
+        <script src="/X-admin/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="/X-admin/js/xadmin.js"></script>
+        <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+        <!--[if lt IE 9]>
+          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script>
+            // 是否开启刷新记忆tab功能
+            var is_remember = false;
+        </script>
+    </head>
+    <body class="index">
+        <!-- 顶部开始 -->
+        <div class="container">
+            <div class="logo">
+                <a href="/admin/index"><img src="https://www.logosc.cn//oss/icons/2021/11/29/icon_61a4a80362434.svg" class="layui-nav-img">管理员</a></div>
+            <div class="left_open">
+                <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
+            </div>
+
+            <ul class="layui-nav right" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="https://www.logosc.cn/oss/icons/2022/03/02/icon_621f396984287.svg" class="layui-nav-img">
+<!--                        通过thymeleaf模板在session中取当前用户-->
+                        <span style="color: white" th:text="${current.getRealname()}"></span>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <!-- 二级菜单 -->
+                        <dd>
+                            <a href="/public/login">退出</a>
+                        </dd>
+                    </dl>
+                </li>
+
+            </ul>
+        </div>
+        <!-- 顶部结束 -->
+        <!-- 中部开始 -->
+        <!-- 左侧菜单开始 -->
+        <div class="left-nav">
+            <div id="side-nav">
+                <ul id="nav">
+                    <li>
+                        <a onclick="xadmin.add_tab('学生用户','/admin/students')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>学生用户</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('教师用户','/admin/teachers',true)">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>教师用户</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('用户搜索','/admin/search',true)">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>用户搜索</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('课程管理','/admin/courses')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>课程管理</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('必修通知','/admin/informs')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>必修通知</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('选修通知','/admin/informs2')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>选修通知</cite></a>
+                    </li>
+
+                    <li>
+                        <a onclick="xadmin.add_tab('文件管理','/admin/files',true)">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>文件管理</cite></a>
+                    </li>
+
+                    <li>
+                        <a onclick="xadmin.add_tab('角色一揽','/admin/roles',true)">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>角色一揽</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('用户权限','/admin/authorities')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>用户权限</cite></a>
+                    </li>
+
+                    <li>
+                        <a onclick="xadmin.add_tab('菜单管理','/admin/manageMenu')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>菜单管理</cite></a>
+                    </li>
+
+                    <li>
+                        <a onclick="xadmin.add_tab('系统信息','/admin/systemInfo')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>系统信息</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('登陆日志','/admin/loginLog')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>登陆日志</cite></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!-- <div class="x-slide_left"></div> -->
+        <!-- 左侧菜单结束 -->
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+            <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+                <ul class="layui-tab-title">
+                    <li class="home">
+                        <i class="layui-icon">&#xe68e;</i>我的桌面</li></ul>
+                <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                    <dl>
+                        <dd data-type="this">关闭当前</dd>
+                        <dd data-type="other">关闭其它</dd>
+                        <dd data-type="all">关闭全部</dd></dl>
+                </div>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <iframe src='/admin/systemInfo' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                    </div>
+                </div>
+                <div id="tab_show"></div>
+            </div>
+        </div>
+        <div class="page-content-bg"></div>
+        <style id="theme_style"></style>
+        <!-- 右侧主体结束 -->
+        <!-- 中部结束 -->
+    </body>
+
+</html>
